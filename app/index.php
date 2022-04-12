@@ -1,18 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Best php website UwU </title>
-</head>
-<body>
-    <nav>
-        <ul>
-            <li><a href="/index.php">Home</a></li>
-            <li><a href="/about.php">About us</a></li>
-        </ul>
-    </nav>
-    <h1> HOME</h1>
-</body>
-</html>
+<?php
+
+    require_once 'vendor/autoload.php';
+    require_once 'app/config/AppKernel.php';
+
+

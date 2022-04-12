@@ -18,3 +18,10 @@ services:
             default:
                 aliases:
                     - 'app.m2i'
+    mysql:
+        image: mysql:8.0.28-debian
+        volumes:
+            - .docker/data:/var/lib/mysql
+        environment:
+            - MYSQL_ROOT_PASSWORD=paris
+
