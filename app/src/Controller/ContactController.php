@@ -1,33 +1,22 @@
 <?php
-    namespace M2I\Poo\Controller;
 
-    use M2i\Framework\AbstractController;
-    use M2i\Poo\Entity\Contact;
+namespace M2i\Poo\Controller;
 
 
-    class ContactController extends AbstractController
+use M2i\Framework\AbstractController;
+use M2i\Poo\Entity\Contact;
+use M2i\Poo\Service\ContactService;
+
+class ContactController extends AbstractController
+{
+    public function index()
     {
-        // private $connection = new PDO("host:mysql;dbname=dbphp", "root", "paris");
-
-        public function getContact(){
-            $connection = new PDO("host:mysql;dbname=dbphp", "root", "paris");
-            $contactsStatement = $db->prepare('SELECT * FROM contact');
-            $contactsStatement->execute();
-            $contacts = $contactsStatement->fetchAll();
-
-            $this->render('contact.php', $contacts);
-            
+        if (strtolower($_SERVER["REQUEST_METHOD"]) === 'post') {
+            $contact = new Contact($_POST);
+            $contactService = new ContactService;
+            $contactService->create($contact);
         }
 
-        public function createContact(){
-            
-        }
-
-        public function updateContact(){
-            
-        }
-        
-        public function deleteContact(){
-            
-        }
+        echo $this->render('contact.php', ["contact" => '']);
     }
+}

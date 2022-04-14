@@ -17,11 +17,15 @@ services:
         networks:
             default:
                 aliases:
-                    - 'app.m2i'
+                    - ${DOMAIN_ALIASES}
     mysql:
         image: mysql:8.0.28-debian
         volumes:
             - .docker/data:/var/lib/mysql
         environment:
-            - MYSQL_ROOT_PASSWORD=paris
+            - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+            - MYSQL_USER=${MYSQL_USER}
+            - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+        ports:
+            - 3306:3306
 

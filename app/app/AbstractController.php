@@ -2,15 +2,29 @@
 
 namespace M2i\Framework;
 
-class AbstractController
+use M2i\Framework\DAO;
+
+abstract class AbstractController
 {
-    public function render($template, $data=[])
+    protected $connection = null;
+
+    public function __construct()
     {
-        $loader = new \Twig\Loader\FilesystemLoader('src/Ressources/views');
-            $twig = new \Twig\Environment($loader, [
-                'cache' => 'var/cache',
-                'debug' => true
-            ]);
-            echo $twig->render($template, $data);
+        try {
+            $this->connection = (new DAO)->getConnection();
+        } catch (\PDOException $e) {
+            dd($e);
+        }
+    }
+
+    public function render($template, $data = [])
+    {
+        $loader =  new \Twig\Loader\FilesystemLoader('src/Resources/views');
+        $twig = new \Twig\Environment($loader, [
+            'cache' => 'var/cache',
+            'debug' => true
+        ]);
+
+        return $twig->render($template, $data);
     }
 }
